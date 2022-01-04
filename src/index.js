@@ -1,31 +1,39 @@
 import './css/styles.css';
 import countryCard from './country-card.hbs';
 import Notiflix from 'notiflix';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 
-// import './fetchCountries';
+import API from'./fetchCountries';
 const debounce = require('lodash.debounce');
 
 const DEBOUNCE_DELAY = 300;
 
 const inputEl = document.querySelector('#search-box');
-const countryList = document.querySelector('country-list');
+const countryList = document.querySelector('.country-list');
 
-inputEl.addEventListener('input', debounce(fetchCountries, DEBOUNCE_DELAY));
+inputEl.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
 
-fetchCountries()
-    .then(renderCountryCard)
-    .catch(error =>
-        console.log(error));
 
-function fetchCountries(name) {
-  return fetch(`https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags,languages`)
-         .then(r => {
-            return r.json()
-        })
+function onSearch(e) {
+ e.preventDefault();
+  clearCountryCard();
+  const formValue = e.target.value;
+   
+  if (formValue.length === 1) {
+    Notiflix.Report.info('Too many matches found. Please enter a more specific name.');
+  } else if (formValue.length >= 2) {
+    return API.fetchCountries(formValue)
+  .then(data => renderCountryCard(data));
+  } 
+ 
 }
 
+
 function renderCountryCard(country) {
-  const markUp = countryCard(country);
+  const markUp = countryCard(...country);
   countryList.innerHTML = markUp;
+}
+function clearCountryCard() {
+  countryList.innerHTML ='';
 }
