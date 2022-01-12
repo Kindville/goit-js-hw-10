@@ -1,5 +1,6 @@
 import Notiflix from 'notiflix';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+const axios = require('axios').default;
 
 function fetchPictures(name) {
   if (name) {
