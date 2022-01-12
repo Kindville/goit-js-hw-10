@@ -24,7 +24,7 @@ function onSearch(e) {
   API.fetchCountries(formValue).then(data => {
     clearCountryCard();
      if (data.length > 10) {
-    return  Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
+      Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
     
     } else if (data.length === 1) {
       renderCountryCard(data, countryCard);
