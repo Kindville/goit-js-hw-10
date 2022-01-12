@@ -1,13 +1,14 @@
 import Notiflix from 'notiflix';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+const axios = require('axios').default;
 
-function fetchCountries(name) {
+function fetchPictures(name) {
   if (name) {
-      return fetch(`https://restcountries.com/v3.1/name/${name}?fields=name,capital,population,flags,languages`,)
+      return fetch(`https://pixabay.com/api?key=25204764-ad3097bdd52dd29ccb650192a&q=${name}&image_type=photo&orientation=horizontal&safesearch=true`,)
   
         .then(response => {
           if (response.status === 404) {
-                 return  Notiflix.Notify.failure('Oops, there is no country with that name');
+                 return  Notiflix.Notify.failure('Sorry, there are no images matching your search query. Please try again.');
           }
         //  console.log('then', response);
           if (response.ok) return response.json();
@@ -17,5 +18,5 @@ function fetchCountries(name) {
     //     console.log('catch', error));
   }
 }
-export default{fetchCountries}
+export default{fetchPictures}
 

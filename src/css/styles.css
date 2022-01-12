@@ -11,12 +11,12 @@ body {
   color: #212121;
   line-height: 1.5;
 }
-.container {
+/* .container {
   margin-top: 30px;
   display: flex;
   align-items: center;
   flex-direction: column;
-}
+} */
 
 #search-box {
   font: inherit;
@@ -35,7 +35,7 @@ body {
   font-weight: bold;
   font: sans-serif;
 }
-.flag {
+/* .flag {
   width: 50px;
   height: 35px;
   margin-right: 20px;
@@ -45,4 +45,4 @@ body {
   display: flex;
   align-items: center;
   list-style-type: none;
-}
+} */
